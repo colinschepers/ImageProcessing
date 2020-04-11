@@ -48,7 +48,7 @@ function initDropArea() {
 
 function initMenu() {
     const itemHeight = 30;
-    const itemCount = 5;
+    const itemCount = 4;
     const itemWidth = width / itemCount;
 
     button = createButton('Reset');
@@ -58,45 +58,56 @@ function initMenu() {
     button.style('width', itemWidth + 'px');
     button.mousePressed(reset);
 
-    button = createButton('Pixelize');
+    button = createButton('Mosaic');
     button.position(itemWidth * 1, height);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
+    button.mousePressed(() => {
+        blur(5, 0.01);
+        applyNearestNeighborInterpolation(width / 10, height / 10);
+        emboss();
+    });
+
+    button = createButton('Nearest Neighbor Interpolation');
+    button.position(itemWidth * 2, height);
+    button.class('menu-item menu-item-checked');
+    button.style('height', itemHeight + 'px');
+    button.style('width', itemWidth + 'px');
     button.mousePressed(() => applyNearestNeighborInterpolation(width / 15, height / 15));
+
+    button = createButton('Median Cut Color Quantization');
+    button.position(itemWidth * 3, height);
+    button.class('menu-item menu-item-checked');
+    button.style('height', itemHeight + 'px');
+    button.style('width', itemWidth + 'px');
+    button.mousePressed(() => applyMedianCutColorQuantization(32));
 
     button = createButton('Sharpen');
     button.position(itemWidth * 0, height + itemHeight);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
-    button.mousePressed(() => applyFilter(KERNEL_SHARPEN));
+    button.mousePressed(() => sharpen());
 
     button = createButton('Blur');
     button.position(itemWidth * 1, height + itemHeight);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
-    button.mousePressed(() => applyFilter(KERNEL_BLUR));
+    button.mousePressed(() => blur(5, 0.01));
 
     button = createButton('Detect edges');
     button.position(itemWidth * 2, height + itemHeight);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
-    button.mousePressed(() => applyFilter(KERNEL_EDGE_DETECT));
+    button.mousePressed(() => detectEdges());
 
     button = createButton('Emboss');
     button.position(itemWidth * 3, height + itemHeight);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
-    button.mousePressed(() => applyFilter(KERNEL_EMBOSS));
-
-    button = createButton('Median Cut');
-    button.position(itemWidth * 4, height + itemHeight);
-    button.class('menu-item menu-item-checked');
-    button.style('height', itemHeight + 'px');
-    button.style('width', itemWidth + 'px');
-    button.mousePressed(() => applyMedianCutColorQuantization(32));
+    button.mousePressed(() => emboss());
 }

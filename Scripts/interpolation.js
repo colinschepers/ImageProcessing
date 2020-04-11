@@ -6,8 +6,8 @@
 
      for (let j = 0; j < newHeight; j++) {
          for (let i = 0; i < newWidth; i++) {
-             let x = Math.ceil(i * dx);
-             let y = Math.ceil(j * dy);
+             let x = Math.ceil(dx / 2 + i * dx);
+             let y = Math.ceil(dx / 2 + j * dy);
              let pixelIdx = (y * width + x) * 4;
 
              let fromX = parseInt(i * dx);

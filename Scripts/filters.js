@@ -1,53 +1,56 @@
-const KERNEL_IDENTITY = [
-    [0, 0, 0],
-    [0, 1, 0],
-    [0, 0, 0]
-];
+const KERNEL_IDENTITY = [0, 0, 0, 0, 1, 0, 0, 0, 0];
+const KERNEL_SHARPEN = [0, -1, 0, -1, 5, -1, 0, -1, 0];
+const KERNEL_EDGE_DETECT = [-1, -1, -1, -1, 8, -1, -1, -1, -1];
+const KERNEL_EMBOSS = [-2, -1, 0, -1, 1, 1, 0, 1, 2];
 
-const KERNEL_SHARPEN = [
-    [0, -1, 0],
-    [-1, 5, -1],
-    [0, -1, 0]
-];
+function identity() {
+    applyFilter(KERNEL_IDENTITY);
+}
 
-const KERNEL_BLUR = [
-    [1 / 16, 2 / 16, 1 / 16],
-    [2 / 16, 4 / 16, 2 / 16],
-    [1 / 16, 2 / 16, 1 / 16]
-]
+function sharpen() {
+    applyFilter(KERNEL_SHARPEN);
+}
 
-const KERNEL_EDGE_DETECT = [
-    [-1, -1, -1],
-    [-1, 8, -1],
-    [-1, -1, -1]
-]
+function blur(kernelRadius, sigma) {
+    let gaussianBlurKernel = []
+    let deltaR = parseInt((kernelRadius - 1) / 2);
+    for (let y = -deltaR; y <= deltaR; y++) {
+        for (let x = -deltaR; x <= deltaR; x++) {
+            gaussianBlurKernel.push(1 / (2 * Math.PI * sigma * sigma) * Math.exp(-(x * x + y * y) / 2 * sigma * sigma));
+        }
+    }
+    var sum = gaussianBlurKernel.reduce((a, b) => a + b, 0);
+    gaussianBlurKernel = gaussianBlurKernel.map(x => x / sum)
 
-const KERNEL_EMBOSS = [
-    [-2, -1, 0],
-    [-1, 1, 1],
-    [0, 1, 2]
-]
+    applyFilter(gaussianBlurKernel);
+}
+
+function detectEdges() {
+    applyFilter(KERNEL_EDGE_DETECT);
+}
+
+function emboss() {
+    applyFilter(KERNEL_EMBOSS);
+}
 
 function applyFilter(kernel) {
+    let deltaIdx = [];
+    let deltaR = parseInt((Math.sqrt(kernel.length) - 1) / 2);
+    for (let y = -deltaR; y <= deltaR; y++) {
+        for (let x = -deltaR; x <= deltaR; x++) {
+            deltaIdx.push((y * width + x) * 4);
+        }
+    }
+
     let newPixels = new Array(pixels.length).fill(0);
 
-    let dy = (kernel.length - 1) / 2;
-    let dx = (kernel[0].length - 1) / 2;
-
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            var idx = (y * width + x) * 4;
-            for (let j = 0; j < kernel.length; j++) {
-                for (let i = 0; i < kernel[j].length; i++) {
-                    let x2 = (x - dx + i + width) % width;
-                    let y2 = (y - dy + j + height) % height;
-                    let idx2 = (y2 * width + x2) * 4;
-                    newPixels[idx] += kernel[j][i] * pixels[idx2];
-                    newPixels[idx + 1] += kernel[j][i] * pixels[idx2 + 1];
-                    newPixels[idx + 2] += kernel[j][i] * pixels[idx2 + 2];
-                    newPixels[idx + 3] = pixels[idx2 + 3];
-                }
-            }
+    for (let i = 0; i < pixels.length; i += 4) {
+        for (let k = 0; k < kernel.length; k++) {
+            let j = i + deltaIdx[k];
+            newPixels[i] += kernel[k] * pixels[j];
+            newPixels[i + 1] += kernel[k] * pixels[j + 1];
+            newPixels[i + 2] += kernel[k] * pixels[j + 2];
+            newPixels[i + 3] = pixels[i + 3];
         }
     }
 
