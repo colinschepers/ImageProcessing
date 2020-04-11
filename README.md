@@ -1,8 +1,8 @@
 # Image Processing
 
-<a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/ui.gif" alt="" title="Image processing algorithms" width="180"/></a>
-
 Demonstration of several image processing algorithms.
+
+<a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/animation.gif" alt="" title="Image processing" width="180"/></a>
 
 ## Sources
 
