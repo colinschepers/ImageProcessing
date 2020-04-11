@@ -1,4 +1,4 @@
- function applyNearestNeighborInterpolation(pixels, newWidth, newHeight) {
+ function applyNearestNeighborInterpolation(newWidth, newHeight) {
      let newPixels = new Array(pixels.length).fill(0);
 
      let dx = width / newWidth;
@@ -27,5 +27,6 @@
          }
      }
 
-     return newPixels;
+     newPixels.forEach((v, i, arr) => pixels[i] = v);
+     updatePixels();
  }

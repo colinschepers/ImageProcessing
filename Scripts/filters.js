@@ -28,8 +28,9 @@ const KERNEL_EMBOSS = [
     [0, 1, 2]
 ]
 
-function applyFilter(pixels, kernel) {
+function applyFilter(kernel) {
     let newPixels = new Array(pixels.length).fill(0);
+
     let dy = (kernel.length - 1) / 2;
     let dx = (kernel[0].length - 1) / 2;
 
@@ -50,5 +51,6 @@ function applyFilter(pixels, kernel) {
         }
     }
 
-    return newPixels;
+    newPixels.forEach((v, i, arr) => pixels[i] = v);
+    updatePixels();
 }
