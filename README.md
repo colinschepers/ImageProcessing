@@ -2,11 +2,11 @@
 
 This application serves as a demonstration of several image processing techniques.
 
-<a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/animation.gif" alt="" title="Image processing" width="180"/></a>
-
 ## Techniques
 
 ### Kernels
+
+<a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/animation.gif" alt="" title="Image processing" width="240"/></a>
 
 A kernel is a small matrix used in image processing to apply effects like blurring, sharpening, embossing, edge detection, etc. During a so called convolution between a kernel and an image, the local neighbours of each pixel in the image are being added using the weights of the kernel [1, 2].  
 
