@@ -2,7 +2,7 @@
 
 <a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/animation.gif" alt="" title="Image processing" width="240"/></a>
 
-This application serves as a demonstration of several image processing techniques.
+This application serves as a demonstration of several relatively simple image processing techniques.
 
 ## Techniques
 
