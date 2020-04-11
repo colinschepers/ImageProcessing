@@ -3,7 +3,7 @@ var logger;
 
 function setup() {
     frameRate(10);
-    createCanvas(1024, 768);
+    createCanvas(800, 600);
     background(255);
     pixelDensity(1);
     initDropArea();
