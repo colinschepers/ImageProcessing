@@ -69,14 +69,14 @@ function initMenu() {
         emboss();
     });
 
-    button = createButton('Nearest Neighbor Interpolation');
+    button = createButton('Interpolation');
     button.position(itemWidth * 2, height);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');
     button.style('width', itemWidth + 'px');
     button.mousePressed(() => applyNearestNeighborInterpolation(width / 15, height / 15));
 
-    button = createButton('Median Cut Color Quantization');
+    button = createButton('Color Quantization');
     button.position(itemWidth * 3, height);
     button.class('menu-item menu-item-checked');
     button.style('height', itemHeight + 'px');

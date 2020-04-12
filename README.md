@@ -2,7 +2,7 @@
 
 <a href="https://colinschepers.github.io/ImageProcessing"><img align="right" src="./Images/animation.gif" alt="" title="Image processing" width="240"/></a>
 
-This application serves as a demonstration of several relatively simple image processing techniques.
+Everyone reading this has proably opened Photoshop at least once. Ever wondered how the filters works? This application demonstrates several relatively simple image processing techniques.
 
 ## Techniques
 
@@ -20,7 +20,7 @@ Note that the application only uses one dimensional arrays but for visualization
 
 ### Color Quantization
 
-Color quantization is the process that reduces the number of distinct colors in an image [4]. This is done by splitting the pixels of the images *n* times, producing *n&sup2;* distinct colors. At each iteration pixels are sorted by the color channel with the greatest range and then split at the middle into two new buckets. Finally, for each of the generated buckets, the pixels are assigned to their mean color. The application uses a one dimensional array of pixel indices and a queue to recursively generate the buckets.
+Median cut color quantization is the process that reduces the number of distinct colors in an image [4]. This is done by splitting the pixels of the images *n* times, producing *n&sup2;* distinct colors. At each iteration pixels are sorted by the color channel with the greatest range and then split at the middle into two new buckets. Finally, for each of the generated buckets, the pixels are assigned to their mean color. The application uses a one dimensional array of pixel indices and a queue to recursively generate the buckets.
 
 ### Interpolation
 
