@@ -1,5 +1,4 @@
 var imagePixels;
-var logger;
 
 function setup() {
     frameRate(10);
