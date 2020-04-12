@@ -32,7 +32,7 @@ The user interface is shown in the picture. By default a beautiful picture of ca
 
 ## Implementation
 
-This fully front-end based application is written in JavaScript (besides some basic *html* and *css*) and the visualization is done using the *p5.js* library [7].
+This fully front-end based application is written in JavaScript (besides some basic *html* and *css*) and the visualization is done using the *p5.js* library [7]. No external image processing libraries were used.
 
 ## Sources
 
